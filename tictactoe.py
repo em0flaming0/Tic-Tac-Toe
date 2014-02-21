@@ -1,9 +1,12 @@
 #!/usr/bin/python
 
 def CheckMove(row, col, board, valid):
-  if not board[row][col] == 0:
+  if not board[row][col] == "-":
     print "Move Not Valid Please Select New Move..."
     valid = False
+    return valid
+  else:
+    valid = True
     return valid
  
 def CheckWin():
@@ -21,9 +24,9 @@ def FlipPlayer(bit, mark):
   return bit, mark
   
 def Move(bit, mark, board):
-  valid = True #reset valid move variable
+  valid = False #reset valid move variable
   print "\nPlayer %s (%s)" % (bit, mark) 
-  while valid == True:
+  while valid == False:
     r = raw_input("Select Row: "); row = (int(r))-1
     while row < 0 or row >=  3:
       print "Please Re-Enter Number Between 1 and 3"
@@ -37,14 +40,17 @@ def Move(bit, mark, board):
   return bit, mark, board
 
 def PrintBoard(board):
-  for row in board:
-    print row
+  print "%s  |  %s  |  %s" % (board[0][0], board[0][1], board[0][2])
+  print "--------------"
+  print "%s  |  %s  |  %s" % (board[1][0], board[1][1], board[1][2])
+  print "--------------"
+  print "%s  |  %s  |  %s" % (board[2][0], board[2][1], board[2][2])
 
 #----------------main------------------#
 
 def main():
   ## Define Variables
-  board = [[0 for n in xrange(3)] for n in xrange(3)]
+  board = [["-" for n in xrange(3)] for n in xrange(3)]
   player_bit = 1; player_mark = "X"; win = False
 
   ## main()
